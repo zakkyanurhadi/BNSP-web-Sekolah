@@ -109,7 +109,7 @@
         <!-- Sisi Kiri: Sambutan Kepala Sekolah -->
         <div class="floating-sambutan">
             <div class="floating-sambutan-avatar-wrap">
-                <img src="{{ $profile->principal_image ?? asset('images/kepala-sekolah.svg') }}" alt="{{ $profile->principal_name ?? 'Agus Hasan Sadzili, S.Pd' }}" class="floating-sambutan-avatar">
+                <img src="{{ $profile->principal_image ?? asset('images/kepala-sekolah.jpg') }}" alt="{{ $profile->principal_name ?? 'Agus Hasan Sadzili, S.Pd' }}" class="floating-sambutan-avatar">
             </div>
             <div class="floating-sambutan-info">
                 <h3 class="floating-card-title">Sambutan Kepala Sekolah</h3>

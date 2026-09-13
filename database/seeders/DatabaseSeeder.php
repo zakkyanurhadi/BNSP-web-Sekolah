@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
             ],
             'history' => 'SMA Negeri 1 Harapan Bangsa didirikan pada tanggal 14 Juli 1986 atas prakarsa para tokoh pendidikan dan masyarakat yang bertekad menghadirkan sekolah menengah unggulan berwawasan kebangsaan. Berawal dari fasilitas sederhana dengan 4 ruang kelas dan 120 siswa angkatan pertama, sekolah ini terus melesat menjadi salah satu SMA rujukan terdepan di Jawa Barat dengan tradisi prestasi akademik dan kepemimpinan pemuda yang membanggakan.',
             'principal_welcome' => 'Assalamu’alaikum Warahmatullahi Wabarakatuh, salam sejahtera untuk kita semua. Puji syukur kita panjatkan ke hadirat Tuhan Yang Maha Esa atas hadirnya situs resmi SMA Negeri 1 Harapan Bangsa. Di era keterbukaan informasi dan percepatan digital saat ini, website ini kami persembahkan sebagai sarana komunikasi yang transparan, akuntabel, dan interaktif bagi seluruh peserta didik, orang tua, alumni, maupun masyarakat luas. Kami percaya bahwa pendidikan sejati bukan hanya tentang kecerdasan intelektual, tetapi juga ketangguhan karakter dan kemanusiaan. Selamat menjelajahi profil, program, dan prestasi sekolah kami.',
-            'principal_image' => 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80',
+            'principal_image' => '/images/kepala-sekolah.jpg',
         ]);
 
         // 2. Berita & Kegiatan Sekolah
