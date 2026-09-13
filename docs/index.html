@@ -331,6 +331,8 @@
             font-size: 10pt;
             margin-bottom: 4px;
             font-style: italic;
+            page-break-after: avoid;
+            break-after: avoid;
         }
 
         /* Signature Block */
@@ -1056,17 +1058,28 @@ php artisan serve</div>
         <!-- 8. Potongan Source Code Inti -->
         <section id="bab-8">
             <h2 class="section-heading">8. Potongan Source Code Inti</h2>
+            <p>
+                Bagian ini menyajikan potongan kode sumber (<em>source code</em>) inti yang merepresentasikan arsitektur teknis aplikasi Website Sekolah SMA Negeri 1 Harapan Bangsa. Kode-kode pilihan berikut memperlihatkan pemenuhan standar penulisan kode bersih (<em>clean code</em>), konvensi PSR-12, arsitektur <em>Model-View-Controller</em> (MVC) Laravel 13, pertahanan keamanan (Anti-CSRF &amp; validasi masukan), serta optimasi mesin pencari (SEO) sesuai dengan unit kompetensi Skema Sertifikasi Junior Web Developer.
+            </p>
             
-            <h3 class="subsection-heading">8.1 Komponen Zero Section Swiper Hero Slider (resources/views/home.blade.php)</h3>
-            <div class="code-title">Listing 8.1 Zero Section Swiper Hero Slider</div>
-            <div class="code-block">&lt;!-- Swiper Hero Slider --&gt;
+            <h3 class="subsection-heading">8.1 Komponen Hero Slider Interaktif Beranda (resources/views/home.blade.php)</h3>
+            <p class="no-indent" style="margin-bottom: 0.35rem; font-size: 10pt;">
+                Mengintegrasikan pustaka Swiper.js pada zero-section beranda untuk menghadirkan tayangan visual warta unggulan dan SPMB yang responsif, dilengkapi overlay pelindung kontras teks serta navigasi panah interaktif.
+            </p>
+            <div class="code-title">Listing 8.1 Komponen Zero Section Swiper Hero Slider</div>
+            <div class="code-block">&lt;!-- Swiper Hero Slider (Zero Section Beranda) --&gt;
 &lt;div class="hero-slider swiper-container"&gt;
     &lt;div class="swiper-wrapper"&gt;
         &lt;div class="swiper-slide slide-1"&gt;
             &lt;div class="slide-overlay"&gt;&lt;/div&gt;
             &lt;div class="slide-content"&gt;
-                &lt;h1 class="slide-title"&gt;SEMANGAT SPMB&lt;/h1&gt;
-                &lt;p class="slide-subtitle"&gt;Penerimaan Peserta Didik Baru Tahun Ajaran 2026/2027 Telah Dibuka&lt;/p&gt;
+                &lt;span class="slide-badge"&gt;&lt;i class="fa fa-graduation-cap"&gt;&lt;/i&gt; SPMB 2026/2027&lt;/span&gt;
+                &lt;h1 class="slide-title"&gt;SEMANGAT SPMB GELOMBANG I&lt;/h1&gt;
+                &lt;p class="slide-subtitle"&gt;Membentuk Generasi Unggul Berkarakter, Berdaya Saing Global, dan Berwawasan Lingkungan.&lt;/p&gt;
+                &lt;div class="slide-actions"&gt;
+                    &lt;a href="{{ route('profile') }}" class="btn-hero btn-hero-primary"&gt;Profil Sekolah&lt;/a&gt;
+                    &lt;a href="{{ route('contact') }}" class="btn-hero btn-hero-outline"&gt;Hubungi Kami&lt;/a&gt;
+                &lt;/div&gt;
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
@@ -1075,10 +1088,197 @@ php artisan serve</div>
         &lt;div class="swiper-button-prev hero-nav-btn"&gt;&lt;i class="fa fa-arrow-left"&gt;&lt;/i&gt;&lt;/div&gt;
         &lt;div class="swiper-button-next hero-nav-btn"&gt;&lt;i class="fa fa-arrow-right"&gt;&lt;/i&gt;&lt;/div&gt;
     &lt;/div&gt;
+    &lt;div class="swiper-pagination hero-pagination"&gt;&lt;/div&gt;
 &lt;/div&gt;</div>
 
-            <h3 class="subsection-heading">8.2 Controller CRUD Manajemen Berita Admin (app/Http/Controllers/Admin/AdminBeritaController.php)</h3>
-            <div class="code-title">Listing 8.2 Controller CRUD Berita Panel CMS</div>
+            <h3 class="subsection-heading">8.2 Arsitektur Perutean Terpusat &amp; Generator Peta Situs SEO (routes/web.php)</h3>
+            <p class="no-indent" style="margin-bottom: 0.35rem; font-size: 10pt;">
+                Mengorganisasi seluruh titik akhir (endpoint) URL portal secara terpusat, pengelompokan rute CMS berpagar middleware <code>auth</code>, serta generator dinamis peta situs XML (Sitemap Engine) berstandar Sitemaps.org.
+            </p>
+            <div class="code-title">Listing 8.2 Konfigurasi Perutean Web dan Dynamic XML Sitemap Generator</div>
+            <div class="code-block">&lt;?php
+
+use App\Http\Controllers\{HomeController, ProfileController, ExtracurricularController, GalleryController, NewsController, ContactController};
+use App\Http\Controllers\Admin\{AdminAuthController, AdminDashboardController, AdminBeritaController};
+use Illuminate\Support\Facades\Route;
+
+// Rute Navigasi Publik Portal Informasi Sekolah
+Route::get('/', [HomeController::class, 'index'])-&gt;name('home');
+Route::get('/profil', [ProfileController::class, 'index'])-&gt;name('profile');
+Route::get('/ekstrakurikuler', [ExtracurricularController::class, 'index'])-&gt;name('extracurricular.index');
+Route::get('/galeri', [GalleryController::class, 'index'])-&gt;name('gallery.index');
+Route::get('/berita', [NewsController::class, 'index'])-&gt;name('news.index');
+Route::get('/berita/{slug}', [NewsController::class, 'show'])-&gt;name('news.show');
+Route::get('/kontak', [ContactController::class, 'index'])-&gt;name('contact');
+Route::post('/kontak', [ContactController::class, 'store'])-&gt;name('contact.store');
+
+// Generator Peta Situs Dinamis untuk Optimasi Mesin Pencari (SEO XML Sitemap)
+Route::get('/sitemap.xml', function () {
+    $urls = [route('home'), route('profile'), route('extracurricular.index'), route('gallery.index'), route('news.index'), route('contact')];
+    $xml = '&lt;?xml version="1.0" encoding="UTF-8"?&gt;' . "\n" . '&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;' . "\n";
+    foreach ($urls as $url) {
+        $xml .= "  &lt;url&gt;\n    &lt;loc&gt;{$url}&lt;/loc&gt;\n    &lt;changefreq&gt;weekly&lt;/changefreq&gt;\n    &lt;priority&gt;0.8&lt;/priority&gt;\n  &lt;/url&gt;\n";
+    }
+    if (class_exists(\App\Models\News::class)) {
+        foreach (\App\Models\News::latest()-&gt;get() as $news) {
+            $xml .= "  &lt;url&gt;\n    &lt;loc&gt;" . route('news.show', $news-&gt;slug) . "&lt;/loc&gt;\n    &lt;changefreq&gt;daily&lt;/changefreq&gt;\n    &lt;priority&gt;0.9&lt;/priority&gt;\n  &lt;/url&gt;\n";
+        }
+    }
+    $xml .= '&lt;/urlset&gt;';
+    return response($xml, 200)-&gt;header('Content-Type', 'text/xml');
+})-&gt;name('sitemap');
+
+// Rute Panel CMS Terproteksi Middleware Otentikasi
+Route::middleware('auth')-&gt;prefix('admin')-&gt;group(function () {
+    Route::get('/', [AdminDashboardController::class, 'index'])-&gt;name('admin');
+    Route::get('/berita', [AdminBeritaController::class, 'index'])-&gt;name('berita');
+    Route::get('/berita/tambah', [AdminBeritaController::class, 'create'])-&gt;name('tambah-berita');
+    Route::post('/berita/tambah', [AdminBeritaController::class, 'store'])-&gt;name('proses-tambah-berita');
+    Route::get('/berita/{id}/edit', [AdminBeritaController::class, 'edit'])-&gt;name('edit-berita');
+    Route::put('/berita/{id}', [AdminBeritaController::class, 'update'])-&gt;name('proses-edit-berita');
+    Route::delete('/berita/{id}', [AdminBeritaController::class, 'destroy'])-&gt;name('hapus-berita');
+});</div>
+
+            <h3 class="subsection-heading">8.3 Model Entitas Data Eloquent ORM &amp; Accessor Kustom (app/Models/News.php)</h3>
+            <p class="no-indent" style="margin-bottom: 0.35rem; font-size: 10pt;">
+                Mengenkapsulasi tabel basis data warta berita dengan proteksi Mass-Assignment, casting atribut tanggal/boolean otomatis, serta accessor dinamis penjamin keselarasan antarmuka.
+            </p>
+            <div class="code-title">Listing 8.3 Model Eloquent News dengan Casting dan Accessor Kompatibilitas</div>
+            <div class="code-block">&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class News extends Model
+{
+    // Proteksi Mass-Assignment Injection
+    protected $guarded = ['id'];
+
+    // Casting Tipe Data Otomatis
+    protected function casts(): array
+    {
+        return [
+            'published_at' =&gt; 'date',
+            'is_featured'  =&gt; 'boolean',
+        ];
+    }
+
+    // Accessor &amp; Mutator Kompatibilitas Antarmuka Blade dan Panel CMS
+    public function getJudulAttribute(): ?string
+    {
+        return $this-&gt;attributes['title'] ?? null;
+    }
+
+    public function setJudulAttribute($value): void
+    {
+        $this-&gt;attributes['title'] = $value;
+    }
+
+    public function getKontenAttribute(): ?string
+    {
+        return $this-&gt;attributes['content'] ?? null;
+    }
+
+    public function getCategoryNameAttribute(): string
+    {
+        return $this-&gt;category ?? 'Kegiatan';
+    }
+
+    public function getStatusPublishAttribute(): string
+    {
+        return 'publish';
+    }
+}</div>
+
+            <h3 class="subsection-heading">8.4 Controller Agregasi Beranda &amp; Ekstraksi Data Multi-Entitas (app/Http/Controllers/HomeController.php)</h3>
+            <p class="no-indent" style="margin-bottom: 0.35rem; font-size: 10pt;">
+                Mengorkestrasikan perolehan data dari 4 entitas model secara paralel dan efisien untuk menyuplai seluruh blok konten halaman beranda dalam satu siklus permintaan.
+            </p>
+            <div class="code-title">Listing 8.4 Controller Agregasi Multi-Model Beranda</div>
+            <div class="code-block">&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Extracurricular;
+use App\Models\Gallery;
+use App\Models\News;
+use App\Models\SchoolProfile;
+use Illuminate\View\View;
+
+class HomeController extends Controller
+{
+    public function index(): View
+    {
+        // Pengambilan data profil legalitas dan identitas pimpinan sekolah
+        $profile = SchoolProfile::first();
+
+        // Mengambil 6 warta berita terkini terurut tanggal rilis
+        $latestNews = News::latest('published_at')-&gt;take(6)-&gt;get();
+
+        // Mengambil 6 foto dokumentasi kegiatan terbaru
+        $latestGalleries = Gallery::latest('activity_date')-&gt;take(6)-&gt;get();
+
+        // Mengambil 4 ekstrakurikuler unggulan
+        $featuredEkskul = Extracurricular::take(4)-&gt;get();
+
+        return view('home', compact('profile', 'latestNews', 'latestGalleries', 'featuredEkskul'));
+    }
+}</div>
+
+            <h3 class="subsection-heading">8.5 Controller Form Kontak, Validasi Masukan &amp; Proteksi CSRF (app/Http/Controllers/ContactController.php)</h3>
+            <p class="no-indent" style="margin-bottom: 0.35rem; font-size: 10pt;">
+                Mengimplementasikan sanitasi input ketat (whitelist validation), pencegahan serangan Cross-Site Scripting (XSS), persistensi data pesan, dan umpan balik flash session berbahasa Indonesia.
+            </p>
+            <div class="code-title">Listing 8.5 Validasi dan Penanganan Formulir Kontak Aspirasi Masyarakat</div>
+            <div class="code-block">&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Models\ContactMessage;
+use App\Models\SchoolProfile;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+class ContactController extends Controller
+{
+    public function index(): View
+    {
+        $profile = SchoolProfile::first();
+        return view('contact', compact('profile'));
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        // Validasi ketat format dan batasan panjang karakter masukan
+        $validated = $request-&gt;validate([
+            'name'    =&gt; 'required|string|max:100',
+            'email'   =&gt; 'required|email|max:150',
+            'phone'   =&gt; 'nullable|string|max:30',
+            'subject' =&gt; 'required|string|max:150',
+            'message' =&gt; 'required|string|max:2000',
+        ], [
+            'name.required'    =&gt; 'Nama lengkap wajib diisi.',
+            'email.required'   =&gt; 'Alamat email wajib diisi.',
+            'email.email'      =&gt; 'Format alamat email tidak valid.',
+            'subject.required' =&gt; 'Subjek pesan wajib diisi.',
+            'message.required' =&gt; 'Isi pesan wajib diisi.',
+        ]);
+
+        // Persistensi data aspirasi masyarakat ke basis data PostgreSQL
+        ContactMessage::create($validated);
+
+        return redirect()-&gt;route('contact')
+            -&gt;with('success', 'Terima kasih! Pesan dan aspirasi Anda telah berhasil terkirim ke pihak sekolah.');
+    }
+}</div>
+
+            <h3 class="subsection-heading">8.6 Controller CRUD Manajemen Berita Panel CMS (app/Http/Controllers/Admin/AdminBeritaController.php)</h3>
+            <p class="no-indent" style="margin-bottom: 0.35rem; font-size: 10pt;">
+                Mengatur alur manajemen konten warta berita oleh staf sekolah dengan kemampuan pencarian judul dinamis, paginasi terindeks, dan verifikasi keunikan tautan slug.
+            </p>
+            <div class="code-title">Listing 8.6 Controller CRUD Berita Panel CMS</div>
             <div class="code-block">namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -1093,29 +1293,80 @@ class AdminBeritaController extends Controller
     public function index(Request $request): View
     {
         $query = News::latest();
-        if ($request->filled('search')) {
-            $query->where('title', 'like', '%' . $request->input('search') . '%');
+        if ($request-&gt;filled('search')) {
+            $query-&gt;where('title', 'like', '%' . $request-&gt;input('search') . '%');
         }
-        $beritas = $query->paginate(10)->withQueryString();
+        $beritas = $query-&gt;paginate(10)-&gt;withQueryString();
         return view('admin.berita.index', compact('beritas'));
     }
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'judul' => 'required|string|max:255',
-            'slug'  => 'required|string|max:255|unique:news,slug',
+        $validated = $request-&gt;validate([
+            'judul' =&gt; 'required|string|max:255',
+            'slug'  =&gt; 'required|string|max:255|unique:news,slug',
         ]);
         News::create([
-            'title'   => $validated['judul'],
-            'slug'    => Str::slug($validated['slug']),
-            'content' => $request->input('isi_berita') ?? 'Konten berita.',
-            'author'  => auth()->user()->name ?? 'Administrator',
-            'published_at' => now(),
+            'title'        =&gt; $validated['judul'],
+            'slug'         =&gt; Str::slug($validated['slug']),
+            'content'      =&gt; $request-&gt;input('isi_berita') ?? 'Konten berita.',
+            'author'       =&gt; auth()-&gt;user()-&gt;name ?? 'Administrator',
+            'published_at' =&gt; now(),
         ]);
-        return redirect()->route('berita')->with('success', 'Berita berhasil ditambahkan!');
+        return redirect()-&gt;route('berita')-&gt;with('success', 'Berita berhasil ditambahkan!');
+    }
+
+    public function destroy($id): RedirectResponse
+    {
+        $berita = News::findOrFail($id);
+        $berita-&gt;delete();
+        return redirect()-&gt;route('berita')-&gt;with('success', 'Warta berita berhasil dihapus!');
     }
 }</div>
+
+            <h3 class="subsection-heading">8.7 Templating Semantik Tabel 22 Parameter Profil Sekolah (resources/views/profile.blade.php)</h3>
+            <p class="no-indent" style="margin-bottom: 0.35rem; font-size: 10pt;">
+                Mengorganisasi penyajian 22 parameter profil legalitas resmi sekolah ke dalam tabel semantik HTML5 yang terstruktur dan responsif pada semua ukuran layar perangkat.
+            </p>
+            <div class="code-title">Listing 8.7 Struktur Tabel Semantik Profil Legalitas dan Kontak Sekolah</div>
+            <div class="code-block">&lt;div class="profile-table-container"&gt;
+    &lt;table class="profile-table"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;&lt;th colspan="2"&gt;A. IDENTITAS &amp;amp; LEGALITAS RESMI SEKOLAH&lt;/th&gt;&lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td class="profile-table-label"&gt;Nama Resmi Sekolah&lt;/td&gt;
+                &lt;td class="profile-table-value"&gt;&lt;strong&gt;{{ $profile-&gt;name }}&lt;/strong&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="profile-table-label"&gt;NPSN / NSS&lt;/td&gt;
+                &lt;td class="profile-table-value"&gt;{{ $profile-&gt;npsn }} / {{ $profile-&gt;nss }}&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="profile-table-label"&gt;Status Akreditasi&lt;/td&gt;
+                &lt;td class="profile-table-value"&gt;&lt;span class="badge-accreditation"&gt;TERAKREDITASI {{ $profile-&gt;accreditation }} (Unggul)&lt;/span&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="profile-table-label"&gt;Kepala Sekolah Saat Ini&lt;/td&gt;
+                &lt;td class="profile-table-value"&gt;&lt;strong&gt;{{ $profile-&gt;principal_name }}&lt;/strong&gt; (NIP. {{ $profile-&gt;principal_nip }})&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;&lt;th colspan="2"&gt;B. LOKASI, ALAMAT, &amp;amp; KONTAK RESMI&lt;/th&gt;&lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td class="profile-table-label"&gt;Alamat Lengkap&lt;/td&gt;
+                &lt;td class="profile-table-value"&gt;{{ $profile-&gt;address }}, RT {{ $profile-&gt;rt_rw }}, Kel. {{ $profile-&gt;village }}, Kec. {{ $profile-&gt;district }}, {{ $profile-&gt;city }}&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td class="profile-table-label"&gt;Email &amp;amp; Website&lt;/td&gt;
+                &lt;td class="profile-table-value"&gt;{{ $profile-&gt;email }} | {{ $profile-&gt;website }}&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;</div>
         </section>
 
         <!-- 9. Kesimpulan dan Penutup -->
