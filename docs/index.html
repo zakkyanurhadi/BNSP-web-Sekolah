@@ -598,12 +598,12 @@
                 Transformasi digital di sektor pendidikan menuntut SMA Negeri 1 Harapan Bangsa untuk terus mengoptimalkan keterbukaan informasi publik dan efisiensi komunikasi interaktif. Pengembangan Sistem Informasi Portal Profil Sekolah berbasis web ini hadir sebagai solusi terpadu untuk menyajikan informasi kelembagaan yang transparan, akuntabel, dan dapat diakses dengan cepat oleh peserta didik, orang tua/wali murid, alumni, maupun masyarakat luas.
             </p>
             <p>
-                Aplikasi ini dibangun menggunakan arsitektur <strong>Laravel 12.x (Model-View-Controller)</strong> dan sistem manajemen basis data relasional PostgreSQL. Portal ini menyajikan gambaran komprehensif mengenai profil kelembagaan, visi dan misi, struktur kepemimpinan, ketersediaan sarana prasarana, data statistik pokok pendidikan (guru, siswa, dan rombel), warta berita kegiatan sekolah, galeri dokumentasi multimedia, daftar program ekstrakurikuler unggulan, hingga fitur kirim pesan melalui formulir kontak terintegrasi.
+                Aplikasi ini dibangun menggunakan arsitektur <strong>Laravel 13.x (Model-View-Controller)</strong> dan sistem manajemen basis data relasional PostgreSQL. Portal ini menyajikan gambaran komprehensif mengenai profil kelembagaan, visi dan misi, struktur kepemimpinan, ketersediaan sarana prasarana, data statistik pokok pendidikan (guru, siswa, dan rombel), warta berita kegiatan sekolah, galeri dokumentasi multimedia, daftar program ekstrakurikuler unggulan, hingga fitur kirim pesan melalui formulir kontak terintegrasi.
             </p>
 
             <h3 class="subsection-heading">1.2 Karakteristik & Arsitektur Utama Aplikasi</h3>
             <p>
-                Aplikasi ini dikembangkan di atas arsitektur Model-View-Controller (MVC) menggunakan fondasi framework Laravel 12.x dengan integrasi database relasional PostgreSQL:
+                Aplikasi ini dikembangkan di atas arsitektur Model-View-Controller (MVC) menggunakan fondasi framework Laravel 13.x dengan integrasi database relasional PostgreSQL:
             </p>
             <ul>
                 <li><strong>Pemisahan Logika dan Tampilan:</strong> Alur data dikendalikan secara terisolasi oleh Controller, entitas data dikelola oleh Eloquent ORM dengan PostgreSQL, dan antarmuka disajikan melalui templating modular Blade.</li>
@@ -623,7 +623,7 @@
                 <tbody>
                     <tr>
                         <td><strong>Framework Aplikasi Utama</strong></td>
-                        <td>Laravel 12.x (Arsitektur Model-View-Controller)</td>
+                        <td>Laravel 13.x (Arsitektur Model-View-Controller)</td>
                     </tr>
                     <tr>
                         <td><strong>Panel CMS Administrator</strong></td>
@@ -658,7 +658,7 @@
 
             <h3 class="subsection-heading">1.4 Arsitektur Kode & Struktur Direktori Proyek</h3>
             <p>
-                Proyek dikembangkan berbasis framework <strong>Laravel 12.x</strong> dengan arsitektur Model-View-Controller (MVC) yang tersusun secara terisolasi dan modular sebagai berikut:
+                Proyek dikembangkan berbasis framework <strong>Laravel 13.x</strong> dengan arsitektur Model-View-Controller (MVC) yang tersusun secara terisolasi dan modular sebagai berikut:
             </p>
             <div class="code-block">BNSP-web-Sekolah/
 ├── app/
@@ -793,6 +793,15 @@
                     <tr><td class="center">9</td><td><code>users</code></td><td>Tunggal (id)</td><td>Akun terotentikasi untuk otorisasi Panel CMS (admin@sekolah.web.id).</td></tr>
                 </tbody>
             </table>
+
+            <!-- Figure 3.1 -->
+            <div class="figure-block">
+                <div class="figure-frame">
+                    <img src="screenshots/SS database dan tabel.png" alt="Struktur Skema Basis Data PostgreSQL & Tabel" class="figure-img">
+                </div>
+                <div class="figure-caption">Gambar 3.1 Skema Basis Data Relasional PostgreSQL &amp; Daftar Entitas Tabel</div>
+                <div class="figure-desc">Visualisasi skema database PostgreSQL (db_sekolah) yang menyimpan 9 entitas data utama portal sekolah.</div>
+            </div>
         </section>
 
         <!-- 4. Penerapan Unit Kompetensi BNSP -->
@@ -821,7 +830,7 @@
 
             <h3 class="subsection-heading">4.5 Unit J.620100.019.02 — Pemanfaatan Library dan Komponen Pre-Existing</h3>
             <p>
-                Memanfaatkan library modern terverifikasi seperti Laravel Framework 12.x, Swiper.js 11, Tailwind CSS 4.x, Alpine.js 3.x, dan Font Awesome icons.
+                Memanfaatkan library modern terverifikasi seperti Laravel Framework 13.x, Swiper.js 11, Tailwind CSS 4.x, Alpine.js 3.x, dan Font Awesome icons.
             </p>
         </section>
 
@@ -1006,15 +1015,6 @@ php artisan serve</div>
                 <div class="figure-caption">Gambar 7.8 Dasbor Panel CMS Manajemen Konten Sekolah</div>
                 <div class="figure-desc">Pusat pemantauan statistik data pokok, ringkasan legalitas sekolah, daftar warta berita, dan kotak masuk pesan.</div>
             </div>
-
-            <!-- Figure 7.9 -->
-            <div class="figure-block">
-                <div class="figure-frame">
-                    <img src="screenshots/SS database dan tabel.png" alt="Struktur Skema Basis Data PostgreSQL & Tabel" class="figure-img">
-                </div>
-                <div class="figure-caption">Gambar 7.9 Skema Basis Data Relasional PostgreSQL &amp; Daftar Entitas Tabel</div>
-                <div class="figure-desc">Visualisasi skema database PostgreSQL (db_sekolah) yang menyimpan 9 entitas data utama portal sekolah.</div>
-            </div>
         </section>
 
         <!-- 8. Potongan Source Code Inti -->
@@ -1106,7 +1106,7 @@ class AdminBeritaController extends Controller
                         <li><strong>J.620100.016.01:</strong> Mengikuti standar pengkodean PSR-12, pertahanan keamanan anti-CSRF/SQLi, dan aksesibilitas semantik.</li>
                         <li><strong>J.620100.017.02:</strong> Diterapkan melalui enkapsulasi Model Eloquent, RESTful Controllers, dan templating Blade modular.</li>
                         <li><strong>J.620100.010.01:</strong> Dieksekusi melalui pemformatan teks Indonesia, logo vektor SVG tajam, dan modal lightbox foto.</li>
-                        <li><strong>J.620100.019.02:</strong> Memanfaatkan library modern (Laravel 12, Filament 3, Tailwind CSS 4, Alpine.js, Heroicons).</li>
+                        <li><strong>J.620100.019.02:</strong> Memanfaatkan library modern (Laravel 13, Filament 3, Tailwind CSS 4, Alpine.js, Heroicons).</li>
                         <li><strong>Jaminan Kualitas:</strong> Diverifikasi melalui rangkaian Automated Feature Tests yang berhasil lulus secara sempurna.</li>
                     </ul>
                 </li>
