@@ -652,6 +652,58 @@
                     </tr>
                 </tbody>
             </table>
+
+            <h3 class="subsection-heading">1.4 Arsitektur Kode & Struktur Direktori Proyek</h3>
+            <p>
+                Proyek dikembangkan berbasis framework <strong>Laravel 12.x</strong> dengan arsitektur Model-View-Controller (MVC) yang tersusun secara terisolasi dan modular sebagai berikut:
+            </p>
+            <div class="code-block">BNSP-web-Sekolah/
+├── app/
+│   ├── Http/
+│   │   └── Controllers/
+│   │       ├── Admin/
+│   │       │   ├── AdminAuthController.php      &lt;-- Controller Autentikasi Admin CMS
+│   │       │   ├── AdminBeritaController.php    &lt;-- Controller CRUD Manajemen Berita
+│   │       │   └── AdminDashboardController.php &lt;-- Controller Dasbor Admin CMS
+│   │       ├── ContactController.php            &lt;-- Controller Halaman Kontak &amp; Form Pesan
+│   │       ├── ExtracurricularController.php   &lt;-- Controller Halaman Ekstrakurikuler
+│   │       ├── GalleryController.php            &lt;-- Controller Halaman Galeri Foto
+│   │       ├── HomeController.php               &lt;-- Controller Halaman Beranda Utama
+│   │       ├── NewsController.php               &lt;-- Controller Halaman Warta Berita
+│   │       └── ProfileController.php            &lt;-- Controller Halaman Profil Sekolah
+│   └── Models/
+│       ├── ContactMessage.php                   &lt;-- Model Pesan Masuk &amp; Aspirasi
+│       ├── Extracurricular.php                  &lt;-- Model Data Kegiatan Ekstrakurikuler
+│       ├── Gallery.php                          &lt;-- Model Dokumentasi Foto Galeri
+│       ├── News.php                             &lt;-- Model Artikel Berita Sekolah
+│       ├── SchoolProfile.php                    &lt;-- Model Identitas &amp; Data Pokok Sekolah
+│       └── User.php                             &lt;-- Model Pengguna / Administrator CMS
+├── config/                                      &lt;-- Konfigurasi Aplikasi &amp; Sesi
+├── database/
+│   ├── migrations/                              &lt;-- Skrip Migrasi Struktur Tabel PostgreSQL
+│   └── seeders/                                 &lt;-- Seeder Data Awal Identitas &amp; Konten
+├── public/
+│   ├── css/
+│   │   └── style.css                            &lt;-- CSS Custom UI Design System Responsif
+│   ├── js/
+│   │   └── main.js                             &lt;-- JS Interaksi Navbar Scroll &amp; Lightbox
+│   └── storage/                                 &lt;-- Symlink Aset Gambar &amp; Upload Berita
+├── resources/
+│   └── views/
+│       ├── admin/                               &lt;-- View Panel CMS Administrator
+│       │   ├── berita/                          &lt;-- View Manajemen &amp; CRUD Berita
+│       │   ├── dashboard.blade.php              &lt;-- View Dasbor Utama CMS
+│       │   └── login.blade.php                  &lt;-- View Halaman Autentikasi Admin
+│       ├── extracurricular/                     &lt;-- View Halaman Ekstrakurikuler
+│       ├── gallery/                             &lt;-- View Halaman Galeri Foto
+│       ├── layouts/
+│       │   └── app.blade.php                    &lt;-- Master Layout (Header, Navbar, Footer)
+│       ├── news/                                &lt;-- View Katalog &amp; Detail Artikel Berita
+│       ├── contact.blade.php                    &lt;-- View Halaman Kontak &amp; Lokasi Peta
+│       ├── home.blade.php                       &lt;-- View Halaman Beranda (Hero Slider)
+│       └── profile.blade.php                    &lt;-- View Halaman Profil &amp; Tabel 22 Parameter
+└── routes/
+    └── web.php                                  &lt;-- Perutean URL Terpusat Publik &amp; Admin</div>
         </section>
 
         <!-- 2. Matriks Pemenuhan Skenario Soal -->
@@ -951,11 +1003,20 @@ php artisan serve</div>
                 <div class="figure-caption">Gambar 7.8 Dasbor Panel CMS Manajemen Konten Sekolah</div>
                 <div class="figure-desc">Pusat pemantauan statistik data pokok, ringkasan legalitas sekolah, daftar warta berita, dan kotak masuk pesan.</div>
             </div>
+
+            <!-- Figure 7.9 -->
+            <div class="figure-block">
+                <div class="figure-frame">
+                    <img src="screenshots/SS database dan tabel.png" alt="Struktur Skema Basis Data PostgreSQL & Tabel" class="figure-img">
+                </div>
+                <div class="figure-caption">Gambar 7.9 Skema Basis Data Relasional PostgreSQL &amp; Daftar Entitas Tabel</div>
+                <div class="figure-desc">Visualisasi skema database PostgreSQL (db_sekolah) yang menyimpan 9 entitas data utama portal sekolah.</div>
+            </div>
         </section>
 
-        <!-- 8. Lampiran Potongan Kode Sumber -->
+        <!-- 8. Potongan Source Code Inti -->
         <section id="bab-8">
-            <h2 class="section-heading">8. Lampiran Potongan Kode Sumber (Source Code Evidence)</h2>
+            <h2 class="section-heading">8. Potongan Source Code Inti</h2>
             
             <h3 class="subsection-heading">8.1 Komponen Zero Section Swiper Hero Slider (resources/views/home.blade.php)</h3>
             <div class="code-title">Listing 8.1 Zero Section Swiper Hero Slider</div>
