@@ -18,7 +18,7 @@ Sistem Informasi Portal Profil Sekolah SMA Negeri 1 Harapan Bangsa dibangun dan 
 ---
 
 ## 🛠️ **Spesifikasi Teknologi & Lingkungan Pengembangan**
-- **Framework Utama** : Laravel 12.x (Arsitektur Model-View-Controller)
+- **Framework Utama** : Laravel 13.x (Arsitektur Model-View-Controller)
 - **Bahasa Pemrograman** : PHP 8.2+
 - **Sistem Manajemen Basis Data** : **PostgreSQL 16+** (Koneksi: `pgsql`, Database: `db_sekolah`)
 - **Frontend & Styling** : Clean Modern Responsive CSS & Tailwind CSS 4
