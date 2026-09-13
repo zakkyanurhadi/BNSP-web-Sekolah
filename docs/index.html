@@ -7,7 +7,11 @@
     <style>
         @page {
             size: A4;
-            margin: 0;
+            margin: 2cm 2cm 2cm 2cm;
+            @top-left { content: none; }
+            @top-right { content: none; }
+            @bottom-left { content: none; }
+            @bottom-right { content: none; }
         }
 
         :root {
@@ -225,14 +229,24 @@
         .doc-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1rem 0 1.5rem;
-            font-size: 10.5pt;
+            margin: 0.6rem 0 1rem;
+            font-size: 10pt;
+            page-break-inside: auto;
+            break-inside: auto;
+        }
+
+        .doc-table thead {
+            display: table-header-group;
+        }
+
+        .doc-table tr {
             page-break-inside: avoid;
+            break-inside: avoid;
         }
 
         .doc-table th, .doc-table td {
             border: 1px solid #111;
-            padding: 6px 10px;
+            padding: 5px 8px;
             text-align: left;
             vertical-align: top;
         }
@@ -242,7 +256,7 @@
             font-weight: bold;
             text-align: center;
             text-transform: uppercase;
-            font-size: 10pt;
+            font-size: 9.5pt;
         }
 
         .doc-table td.center {
@@ -251,9 +265,14 @@
 
         .table-caption {
             font-weight: bold;
-            font-size: 11pt;
-            margin-bottom: 4px;
+            font-size: 10.5pt;
+            margin-top: 0.75rem;
+            margin-bottom: 5px;
             text-align: left;
+            page-break-after: avoid;
+            break-after: avoid;
+            page-break-inside: avoid;
+            break-inside: avoid;
         }
 
         /* Figures & Screenshots */
@@ -296,14 +315,15 @@
         .code-block {
             border: 1px solid #111;
             background-color: #fafafa;
-            padding: 10px 14px;
-            margin: 0.75rem 0 1.25rem;
+            padding: 8px 12px;
+            margin: 0.5rem 0 0.85rem;
             font-family: "Courier New", Courier, monospace;
-            font-size: 9.5pt;
-            line-height: 1.4;
+            font-size: 8.5pt;
+            line-height: 1.35;
             overflow-x: auto;
             white-space: pre-wrap;
-            page-break-inside: avoid;
+            page-break-inside: auto;
+            break-inside: auto;
         }
 
         .code-title {
@@ -448,6 +468,8 @@
             body {
                 background: #ffffff !important;
                 font-size: 12pt;
+                margin: 0 !important;
+                padding: 0 !important;
             }
             .doc-toolbar {
                 display: none !important;
@@ -455,22 +477,43 @@
             .document-wrapper {
                 max-width: 100% !important;
                 margin: 0 !important;
-                padding: 2.5cm 2cm 2cm 2cm !important;
+                padding: 0 !important;
                 border: none !important;
                 box-shadow: none !important;
             }
             .doc-cover-page {
-                min-height: 100vh;
-                padding: 3.5cm 0 2.5cm;
+                min-height: calc(100vh - 4cm);
+                padding: 1.5cm 0;
                 margin: 0;
-                page-break-after: always;
-                break-after: page;
+                page-break-inside: avoid;
+                break-inside: avoid;
             }
             .page-break {
                 border-top: none;
                 margin: 0;
                 page-break-before: always;
                 break-before: page;
+            }
+            .doc-table {
+                font-size: 9.5pt;
+                margin: 0.5rem 0 0.85rem;
+            }
+            .doc-table th, .doc-table td {
+                padding: 4px 6px;
+            }
+            .code-block {
+                font-size: 8pt;
+                line-height: 1.25;
+                padding: 6px 10px;
+                margin: 0.35rem 0 0.75rem;
+            }
+            .figure-block {
+                margin: 0.85rem 0;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            .figure-img {
+                max-height: 300px !important;
             }
         }
     </style>
