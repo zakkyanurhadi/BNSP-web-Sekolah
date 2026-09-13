@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Tugas Praktik Demonstrasi (FR.IA.02) - Zakkya Nur Hadi</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2.5cm 2cm 2cm 2cm;
+            @bottom-right {
+                content: counter(page);
+                font-family: 'Times New Roman', Times, serif;
+                font-size: 10pt;
+            }
+        }
+
+        :root {
+            --text-color: #111827;
+            --border-color: #374151;
+            --table-border: #4b5563;
+            --bg-body: #f3f4f6;
+            --bg-paper: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, Georgia, serif;
+            font-size: 12pt;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-body);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Screen Toolbar */
+        .doc-toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 52px;
+            background: #1f2937;
+            color: #f9fafb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            z-index: 999;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 13px;
+        }
+
+        .doc-toolbar-title {
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .toolbar-btn-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-toolbar {
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 4px;
+            border: 1px solid #4b5563;
+            background: #374151;
+            color: #ffffff;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s ease;
+        }
+
+        .btn-toolbar:hover {
+            background: #4b5563;
+            border-color: #6b7280;
+        }
+
+        .btn-toolbar-primary {
+            background: #2563eb;
+            border-color: #1d4ed8;
+        }
+
+        .btn-toolbar-primary:hover {
+            background: #1d4ed8;
+        }
+
+        /* Document Container (Paper Sheet Look) */
+        .document-wrapper {
+            max-width: 900px;
+            margin: 72px auto 40px;
+            background: var(--bg-paper);
+            padding: 3.5rem 3.5rem 5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Cover & Header */
+        .doc-header {
+            text-align: center;
+            border-bottom: 3px double #111;
+            padding-bottom: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .doc-subhead {
+            font-size: 11pt;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .doc-main-title {
+            font-size: 16pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            line-height: 1.35;
+            margin: 12px 0 6px;
+        }
+
+        .doc-scheme-title {
+            font-size: 13pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .doc-project-title {
+            font-size: 13pt;
+            font-weight: bold;
+            line-height: 1.4;
+            padding: 8px 16px;
+            border: 1px solid #111;
+            display: inline-block;
+            margin: 8px 0 14px;
+        }
+
+        /* Formal Identity Table */
+        .identity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.25rem 0 2rem;
+            font-size: 11pt;
+        }
+
+        .identity-table td {
+            padding: 4px 8px;
+            vertical-align: top;
+        }
+
+        .identity-table td.label {
+            font-weight: bold;
+            width: 28%;
+        }
+
+        .identity-table td.colon {
+            width: 2%;
+            text-align: center;
+        }
+
+        .identity-table td.val {
+            width: 70%;
+        }
+
+        /* Headings */
+        h2.section-heading {
+            font-size: 13pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1.5px solid #111;
+            padding-bottom: 4px;
+            margin-top: 2.25rem;
+            margin-bottom: 1rem;
+            page-break-after: avoid;
+        }
+
+        h3.subsection-heading {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+            page-break-after: avoid;
+        }
+
+        h4.subsubsection-heading {
+            font-size: 11pt;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 1rem;
+            margin-bottom: 0.35rem;
+            page-break-after: avoid;
+        }
+
+        p {
+            text-align: justify;
+            text-justify: inter-word;
+            margin-bottom: 0.75rem;
+            text-indent: 1.25cm;
+        }
+
+        p.no-indent {
+            text-indent: 0;
+        }
+
+        ul, ol {
+            margin: 0.5rem 0 0.75rem 2.5rem;
+            text-align: justify;
+        }
+
+        li {
+            margin-bottom: 0.35rem;
+        }
+
+        /* Formal Table Styles */
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0 1.5rem;
+            font-size: 10.5pt;
+            page-break-inside: avoid;
+        }
+
+        .doc-table th, .doc-table td {
+            border: 1px solid #111;
+            padding: 6px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .doc-table th {
+            background-color: #f3f4f6;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 10pt;
+        }
+
+        .doc-table td.center {
+            text-align: center;
+        }
+
+        .table-caption {
+            font-weight: bold;
+            font-size: 11pt;
+            margin-bottom: 4px;
+            text-align: left;
+        }
+
+        /* Figures & Screenshots */
+        .figure-block {
+            margin: 1.75rem 0;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+
+        .figure-frame {
+            border: 1px solid #111;
+            padding: 4px;
+            background: #fff;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        .figure-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .figure-caption {
+            font-size: 10.5pt;
+            font-weight: bold;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .figure-desc {
+            font-size: 10pt;
+            font-style: italic;
+            margin-top: 2px;
+            text-align: center;
+            color: #374151;
+        }
+
+        /* Source Code Listings */
+        .code-block {
+            border: 1px solid #111;
+            background-color: #fafafa;
+            padding: 10px 14px;
+            margin: 0.75rem 0 1.25rem;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 9.5pt;
+            line-height: 1.4;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            page-break-inside: avoid;
+        }
+
+        .code-title {
+            font-weight: bold;
+            font-size: 10pt;
+            margin-bottom: 4px;
+            font-style: italic;
+        }
+
+        /* Signature Block */
+        .signature-section {
+            margin-top: 3rem;
+            page-break-inside: avoid;
+        }
+
+        .signature-grid {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .signature-box {
+            width: 45%;
+            text-align: center;
+        }
+
+        .signature-space {
+            height: 75px;
+        }
+
+        .signature-name {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .signature-id {
+            font-size: 10pt;
+            margin-top: 2px;
+        }
+
+        /* Cover Page (Halaman 1) */
+        .doc-cover-page {
+            min-height: 840px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            padding: 2.5rem 1rem 3rem;
+            position: relative;
+        }
+
+        .cover-top {
+            margin-top: 1rem;
+        }
+
+        .cover-title {
+            font-size: 16pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.35;
+            margin-bottom: 6px;
+        }
+
+        .cover-subtitle {
+            font-size: 13.5pt;
+            font-weight: bold;
+            line-height: 1.35;
+        }
+
+        .cover-middle {
+            margin: 2.5rem 0 1.5rem;
+        }
+
+        .cover-by-label {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-indent: 0;
+            text-align: center;
+        }
+
+        .cover-author-name {
+            font-size: 13.5pt;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .cover-author-npm {
+            font-size: 12pt;
+            font-weight: bold;
+            text-indent: 0;
+            text-align: center;
+        }
+
+        .cover-logo-wrap {
+            margin: 2rem auto;
+        }
+
+        .cover-logo-img {
+            width: 170px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .cover-bottom {
+            margin-bottom: 1rem;
+        }
+
+        .cover-institution {
+            font-size: 14pt;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .cover-city {
+            font-size: 13pt;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .cover-year {
+            font-size: 13pt;
+            font-weight: bold;
+            text-indent: 0;
+            text-align: center;
+        }
+
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+            border-top: 2px dashed #cbd5e1;
+            margin: 3.5rem 0;
+        }
+
+        /* Print Media Styles */
+        @media print {
+            body {
+                background: #ffffff !important;
+                font-size: 12pt;
+            }
+            .doc-toolbar {
+                display: none !important;
+            }
+            .document-wrapper {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+            .doc-cover-page {
+                min-height: 100vh;
+                padding: 3.5cm 0 2.5cm;
+                margin: 0;
+                page-break-after: always;
+                break-after: page;
+            }
+            .page-break {
+                border-top: none;
+                margin: 0;
+                page-break-before: always;
+                break-before: page;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Screen Print & Navigation Toolbar -->
+    <header class="doc-toolbar">
+        <div class="doc-toolbar-title">
+            Dokumen Laporan Praktik Demonstrasi (FR.IA.02)
+        </div>
+        <div class="toolbar-btn-group">
+            <button onclick="window.print()" class="btn-toolbar btn-toolbar-primary">
+                Cetak Dokumen / Simpan PDF
+            </button>
+            <a href="http://127.0.0.1:8000" target="_blank" class="btn-toolbar">
+                Portal Publik
+            </a>
+            <a href="http://127.0.0.1:8000/admin" target="_blank" class="btn-toolbar">
+                Panel CMS Admin
+            </a>
+        </div>
+    </header>
+
+    <div class="document-wrapper">
+        <!-- ====================================================================
+             HALAMAN 1: HALAMAN JUDUL / SAMPUL UTAMA (COVER)
+             ==================================================================== -->
+        <div class="doc-cover-page">
+            <div class="cover-top">
+                <div class="cover-title">TPD - TUGAS PRAKTIK DEMONSTRASI</div>
+                <div class="cover-subtitle">Website sekolah (SMAN 1 HARAPAN BANGSA)</div>
+            </div>
+
+            <div class="cover-middle">
+                <p class="cover-by-label">Oleh</p>
+                <div class="cover-author-name">Zakkya Nur Hadi</div>
+                <p class="cover-author-npm">NPM 23753041</p>
+            </div>
+
+            <div class="cover-logo-wrap">
+                <img src="logo-polinela.png" alt="Logo Politeknik Negeri Lampung" class="cover-logo-img">
+            </div>
+
+            <div class="cover-bottom">
+                <div class="cover-institution">POLITEKNIK NEGERI LAMPUNG</div>
+                <div class="cover-city">BANDAR LAMPUNG</div>
+                <p class="cover-year">2026</p>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- ====================================================================
+             HALAMAN 2: LEMBAR PENGESAHAN & MATRIKS IDENTITAS UJI KOMPETENSI
+             ==================================================================== -->
+        <header class="doc-header">
+            <div class="doc-subhead">LSP Entrepreneur Digital Indonesia &bull; Skema Junior Web Developer</div>
+            <h1 class="doc-main-title">LAPORAN TUGAS PRAKTIK DEMONSTRASI (FR.IA.02)</h1>
+            <div class="doc-scheme-title">SKEMA SERTIFIKASI JUNIOR WEB DEVELOPER</div>
+            <div class="doc-project-title">
+                PENGEMBANGAN SISTEM INFORMASI PORTAL PROFIL SEKOLAH BERBASIS WEB<br>
+                (SMA NEGERI 1 HARAPAN BANGSA)
+            </div>
+        </header>
+
+        <!-- Identity Section -->
+        <table class="identity-table">
+            <tr>
+                <td class="label">Skema Sertifikasi</td>
+                <td class="colon">:</td>
+                <td class="val">Junior Web Developer (02/SKM/DID/VII/2024)</td>
+            </tr>
+            <tr>
+                <td class="label">Tempat Uji Kompetensi (TUK)</td>
+                <td class="colon">:</td>
+                <td class="val">Politeknik Negeri Lampung (POLINELA), Bandar Lampung</td>
+            </tr>
+            <tr>
+                <td class="label">Lembaga Sertifikasi Profesi</td>
+                <td class="colon">:</td>
+                <td class="val">LSP Entrepreneur Digital Indonesia</td>
+            </tr>
+            <tr>
+                <td class="label">Nama Lengkap Asesi</td>
+                <td class="colon">:</td>
+                <td class="val"><strong>Zakkya Nur Hadi</strong></td>
+            </tr>
+            <tr>
+                <td class="label">Nomor Pokok Mahasiswa (NPM)</td>
+                <td class="colon">:</td>
+                <td class="val"><strong>23753041</strong></td>
+            </tr>
+            <tr>
+                <td class="label">Surel (Email) Asesi</td>
+                <td class="colon">:</td>
+                <td class="val">zakkya.nurhadi@gmail.com</td>
+            </tr>
+            <tr>
+                <td class="label">Nama Asesor Penguji</td>
+                <td class="colon">:</td>
+                <td class="val"><strong>Yosep Kurniawan, ST</strong> (No. Reg 000.002992.2021)</td>
+            </tr>
+            <tr>
+                <td class="label">Tautan Repositori Kode</td>
+                <td class="colon">:</td>
+                <td class="val"><a href="https://github.com/zakkyanurhadi/BNSP-web-Sekolah" target="_blank" style="color:inherit; text-decoration: underline;">https://github.com/zakkyanurhadi/BNSP-web-Sekolah</a></td>
+            </tr>
+        </table>
+
+        <!-- 1. Ringkasan Eksekutif -->
+        <section id="bab-1">
+            <h2 class="section-heading">1. Ringkasan Eksekutif dan Gambaran Umum Aplikasi</h2>
+            
+            <h3 class="subsection-heading">1.1 Latar Belakang & Deskripsi Portal Sekolah</h3>
+            <p>
+                Perkembangan teknologi informasi menuntut institusi pendidikan untuk memiliki media publikasi resmi yang kredibel, transparan, dan mudah diakses oleh masyarakat umum, peserta didik, serta orang tua/wali siswa. Website Sekolah SMA Negeri 1 Harapan Bangsa dirancang dan dikembangkan sebagai portal informasi digital terpadu yang merepresentasikan keunggulan akademik, sarana prasarana, program pembinaan kesiswaan, serta identitas kelembagaan sekolah secara profesional.
+            </p>
+            <p>
+                Situs ini menghadirkan pengalaman penjelajahan yang responsif, modern, dan informatif. Melalui portal ini, pengunjung dapat meninjau visi, misi, sejarah, dan struktur kepemimpinan sekolah; memantau data pokok guru dan siswa secara riil; membaca warta kegiatan serta pengumuman prestasi terkini; menelusuri dokumentasi foto kegiatan; mengakses pengumuman pendaftaran peserta didik baru (PPDB); serta menghubungi pihak sekolah melalui formulir kontak terintegrasi.
+            </p>
+
+            <h3 class="subsection-heading">1.2 Karakteristik & Arsitektur Utama Aplikasi</h3>
+            <p>
+                Aplikasi ini dikembangkan di atas arsitektur Model-View-Controller (MVC) menggunakan fondasi framework Laravel 12.x dengan integrasi database relasional PostgreSQL:
+            </p>
+            <ul>
+                <li><strong>Pemisahan Logika dan Tampilan:</strong> Alur data dikendalikan secara terisolasi oleh Controller, entitas data dikelola oleh Eloquent ORM dengan PostgreSQL, dan antarmuka disajikan melalui templating modular Blade.</li>
+                <li><strong>Zero Section Swiper.js Slider:</strong> Area pendaratan utama (hero banner) mengadopsi Swiper.js Slider modern dengan sentuhan visual inspirasi dari SMAN 9 Bandung ("SEMANGAT SPMB", navigasi bulat, floating card Sambutan Kepala Sekolah dan statistik real-time).</li>
+                <li><strong>Panel CMS Terintegrasi:</strong> Rute <code>/admin</code> menyajikan Panel CMS Manajemen Konten Sekolah yang bersih dan terproteksi (autentikasi <code>admin@sekolah.web.id</code>), dilengkapi contoh implementasi CRUD penuh pada manajemen berita sekolah.</li>
+            </ul>
+
+            <h3 class="subsection-heading">1.3 Matriks Ringkasan Parameter Teknis</h3>
+            <div class="table-caption">Tabel 1.1 Matriks Parameter Teknis Sistem</div>
+            <table class="doc-table">
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Kategori Parameter</th>
+                        <th>Keterangan / Nilai Implementasi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Framework Aplikasi Utama</strong></td>
+                        <td>Laravel 12.x (Arsitektur Model-View-Controller)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Panel CMS Administrator</strong></td>
+                        <td>Panel CMS Manajemen Konten Sekolah (Rute: /admin)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Library Slider Zero Section</strong></td>
+                        <td>Swiper.js v11 (Autoplay, Navigasi Bulat, Smooth Fade Transition)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Library Peta Interaktif (Maps)</strong></td>
+                        <td>Google Maps Embed API (Tampilan Resmi Peta Google, Satelit, Marker Kampus & Rute Navigasi)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sistem Manajemen Basis Data</strong></td>
+                        <td>PostgreSQL (Database: db_sekolah - 9 Entitas Pokok)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kerangka Tampilan (CSS)</strong></td>
+                        <td>Tailwind CSS 4.x / Clean Modern Utility CSS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jumlah Rute Publik Aktif</strong></td>
+                        <td>6 Rute Halaman Mandiri + 1 Endpoint Peta Situs XML (sitemap.xml)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jaminan Uji Mutu Otomatis</strong></td>
+                        <td>Feature Tests PHPUnit Lulus 100% (Green Bar)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 2. Matriks Pemenuhan Skenario Soal -->
+        <section id="bab-2">
+            <h2 class="section-heading">2. Matriks Pemenuhan Skenario Soal (FR.IA.02)</h2>
+            <p class="no-indent">
+                Berdasarkan formulir instruksi Tugas Praktik Demonstrasi FR.IA.02 Skema Sertifikasi Junior Web Developer, seluruh instruksi kerja telah diimplementasikan secara komprehensif pada aplikasi web SMA Negeri 1 Harapan Bangsa:
+            </p>
+
+            <div class="table-caption">Tabel 2.1 Matriks Pemenuhan Ketentuan Skenario Soal Uji Praktik FR.IA.02</div>
+            <table class="doc-table">
+                <thead>
+                    <tr>
+                        <th style="width: 6%;">No</th>
+                        <th style="width: 32%;">Ketentuan Skenario Soal</th>
+                        <th style="width: 38%;">Bukti Teknis Implementasi</th>
+                        <th style="width: 24%;">Lokasi Berkas Sumber</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="center">1</td>
+                        <td>Website sekolah dengan user interface interaktif pada menu-menu di halaman utama</td>
+                        <td>Bilah navigasi interaktif dengan deteksi posisi gulir jendela, transisi clean bottom-underline tanpa background box, menu drawer mobile responsif, serta modul Swiper.js slider pada Zero Section.</td>
+                        <td>resources/views/layouts/app.blade.php<br>public/css/style.css</td>
+                    </tr>
+                    <tr>
+                        <td class="center">2</td>
+                        <td>Pada halaman utama terdapat menu utama seperti Beranda, Profil Sekolah, Ekstrakurikuler/Fasilitas, Galeri, dll.</td>
+                        <td>Struktur menu utama didefinisikan secara terpusat: Beranda, Profil Sekolah, Ekstrakurikuler, Galeri, Berita, dan Kontak, ditambah tautan tombol Data Sekolah.</td>
+                        <td>resources/views/layouts/app.blade.php<br>routes/web.php</td>
+                    </tr>
+                    <tr>
+                        <td class="center">3</td>
+                        <td>Pada halaman utama terdapat berita kegiatan sekolah, galeri dan informasi jumlah guru dan siswa</td>
+                        <td>Halaman Beranda memuat warta berita terkini; galeri dokumentasi foto kegiatan; serta kartu statistik real-time: 75 Guru & Tendik, 1238 Siswa, 33 Rombel di Floating Card Zero Section.</td>
+                        <td>resources/views/home.blade.php<br>app/Http/Controllers/HomeController.php</td>
+                    </tr>
+                    <tr>
+                        <td class="center">4</td>
+                        <td>Setiap Menu utama memiliki halaman tersendiri</td>
+                        <td>Setiap menu navigasi dipetakan ke rute web unik pada routes/web.php yang merender berkas tampilan Blade tersendiri (home, profil, berita, galeri, ekskul, kontak).</td>
+                        <td>routes/web.php<br>resources/views/pages/</td>
+                    </tr>
+                    <tr>
+                        <td class="center">5</td>
+                        <td>Terdapat Tabel Informasi Profil Sekolah pada menu utama Profil Sekolah</td>
+                        <td>Halaman Profil memuat tabel resmi semantik yang merangkum 22 parameter legalitas dan identitas sekolah: NPSN (10812345), Akreditasi A, SK pendirian, alamat, kontak, surel, kepala sekolah, dan kurikulum.</td>
+                        <td>resources/views/profil.blade.php</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 3. Spesifikasi Lingkungan Pengembangan -->
+        <section id="bab-3">
+            <h2 class="section-heading">3. Spesifikasi Lingkungan Pengembangan & Teknologi</h2>
+            
+            <h3 class="subsection-heading">3.1 Perangkat Lunak dan Alat Bantu (Tools)</h3>
+            <p>
+                Lingkungan pengembangan sistem menggunakan Visual Studio Code, PHP 8.2+, Composer 2.7+, Node.js 20, Server Basis Data PostgreSQL, Git Version Control, Swiper.js v11, dan PHPUnit 11.
+            </p>
+
+            <h3 class="subsection-heading">3.2 Struktur Basis Data Relasional PostgreSQL (9 Entitas Pokok)</h3>
+            <div class="table-caption">Tabel 3.1 Struktur Entitas Basis Data Relasional</div>
+            <table class="doc-table">
+                <thead>
+                    <tr>
+                        <th style="width: 6%;">No</th>
+                        <th style="width: 28%;">Nama Tabel</th>
+                        <th style="width: 24%;">Relasi Kunci</th>
+                        <th>Deskripsi Data yang Disimpan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="center">1</td><td><code>school_profiles</code></td><td>Tunggal (id)</td><td>Profil kelembagaan, visi misi, data kepala sekolah, kontak, dan statistik pokok.</td></tr>
+                    <tr><td class="center">2</td><td><code>website_settings</code></td><td>Tunggal (id)</td><td>Konfigurasi umum web, hero banner, SEO meta, dan pengumuman PPDB.</td></tr>
+                    <tr><td class="center">3</td><td><code>categories</code></td><td>One-to-Many ke news</td><td>Klasifikasi kategori warta berita (Prestasi, Pengumuman, Kegiatan).</td></tr>
+                    <tr><td class="center">4</td><td><code>news</code></td><td>Many-to-One ke categories</td><td>Artikel warta berita, judul, isi konten, thumbnail, dan status publish.</td></tr>
+                    <tr><td class="center">5</td><td><code>galleries</code></td><td>Tunggal (id)</td><td>Dokumentasi foto kegiatan sekolah beserta judul dan deskripsi.</td></tr>
+                    <tr><td class="center">6</td><td><code>facilities</code></td><td>Tunggal (id)</td><td>Daftar sarana prasarana sekolah dan spesifikasi ruang belajar.</td></tr>
+                    <tr><td class="center">7</td><td><code>extracurriculars</code></td><td>Tunggal (id)</td><td>Data kegiatan ekstrakurikuler, pembina, dan jadwal latihan.</td></tr>
+                    <tr><td class="center">8</td><td><code>contact_messages</code></td><td>Tunggal (id)</td><td>Pesan kiriman masyarakat melalui formulir kontak dan penanda baca.</td></tr>
+                    <tr><td class="center">9</td><td><code>users</code></td><td>Tunggal (id)</td><td>Akun terotentikasi untuk otorisasi Panel CMS (admin@sekolah.web.id).</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 4. Penerapan Unit Kompetensi BNSP -->
+        <section id="bab-4">
+            <h2 class="section-heading">4. Penerapan Unit Kompetensi BNSP</h2>
+            
+            <h3 class="subsection-heading">4.1 Unit J.620100.015.01 — Menyusun Berkas dalam Organisasi yang Rapi</h3>
+            <p>
+                Aplikasi web mengadopsi struktur baku MVC Laravel dengan pemisahan tanggung jawab kode yang ketat: <code>app/Http/Controllers/</code> untuk pengendali alur data HTTP, <code>app/Models/</code> untuk enkapsulasi Eloquent ORM, <code>resources/views/admin/</code> untuk antarmuka Panel CMS, dan <code>resources/views/layouts/</code> untuk kerangka tampilan publik.
+            </p>
+
+            <h3 class="subsection-heading">4.2 Unit J.620100.016.01 — Menulis Kode Sesuai Guidelines & Best Practices</h3>
+            <p>
+                Menerapkan standar penulisan kode PSR-12, pertahanan keamanan aplikasi (proteksi token CSRF pada seluruh form POST, sanitasi masukan pengguna via <code>$request->validate()</code>, pencegahan SQL Injection via PDO Prepared Statements, dan auto-escaping karakter HTML di Blade template).
+            </p>
+
+            <h3 class="subsection-heading">4.3 Unit J.620100.017.02 — Pemrograman Terstruktur dan Berorientasi Objek</h3>
+            <p>
+                Model data menerapkan enkapsulasi dengan proteksi mass-assignment <code>$fillable</code>, kueri terisolasi dengan local scopes, serta controller berorientasi objek yang modular.
+            </p>
+
+            <h3 class="subsection-heading">4.4 Unit J.620100.010.01 — Eksekusi Bahasa Berbasis Teks, Grafik, dan Multimedia</h3>
+            <p>
+                Integrasi slider grafis Swiper.js, logo vektor SVG tajam, lencana kategori berita, modal lightbox multimedia resolusi tinggi, serta peta sematan responsif Google Maps.
+            </p>
+
+            <h3 class="subsection-heading">4.5 Unit J.620100.019.02 — Pemanfaatan Library dan Komponen Pre-Existing</h3>
+            <p>
+                Memanfaatkan library modern terverifikasi seperti Laravel Framework 12.x, Swiper.js 11, Tailwind CSS 4.x, Alpine.js 3.x, dan Font Awesome icons.
+            </p>
+        </section>
+
+        <!-- 5. Catatan Debugging -->
+        <section id="bab-5">
+            <h2 class="section-heading">5. Catatan Debugging dan Penyelesaian Kendala Teknis</h2>
+            <div class="table-caption">Tabel 5.1 Log Identifikasi Masalah & Solusi Debugging</div>
+            <table class="doc-table">
+                <thead>
+                    <tr>
+                        <th style="width: 6%;">No</th>
+                        <th style="width: 32%;">Gejala Masalah Teknis</th>
+                        <th style="width: 32%;">Analisis Akar Penyebab</th>
+                        <th style="width: 30%;">Tindakan Solutif yang Diterapkan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="center">1</td>
+                        <td>Sesi login admin gagal tersimpan di peramban</td>
+                        <td>Konfigurasi <code>SESSION_DOMAIN=null</code> diterjemahkan oleh PHP sebagai string literal <code>"null"</code></td>
+                        <td>Mengomentari opsi <code>SESSION_DOMAIN</code> sehingga fallback bersih ke host peramban.</td>
+                    </tr>
+                    <tr>
+                        <td class="center">2</td>
+                        <td>Perbedaan nama sistem lama ("Indo Berita") pada modul admin</td>
+                        <td>Berkas tampilan template warisan masih menyertakan nama lama</td>
+                        <td>Melakukan rename menyeluruh menjadi "Panel CMS - Manajemen Konten Sekolah".</td>
+                    </tr>
+                    <tr>
+                        <td class="center">3</td>
+                        <td>Tombol navigasi landing page memiliki background block yang kurang bersih</td>
+                        <td>Kelas CSS <code>.nav-link.active</code> menyertakan latar belakang warna</td>
+                        <td>Menghilangkan background warna dan menetapkan garis bawah (underline) bersih.</td>
+                    </tr>
+                    <tr>
+                        <td class="center">4</td>
+                        <td>Panel dasbor admin memuat banner informasi yang terlalu ramai</td>
+                        <td>Terdapat banner promosi modul Swiper di dalam tampilan dasbor</td>
+                        <td>Menghapus banner tersebut dan merapikan dasbor agar lebih simpel dan profesional.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 6. Petunjuk Instalasi dan Pengoperasian -->
+        <section id="bab-6">
+            <h2 class="section-heading">6. Petunjuk Instalasi & Pengoperasian Sistem</h2>
+            
+            <h3 class="subsection-heading">6.1 Langkah Instalasi dan Deployment Server Lokal</h3>
+            <div class="code-title">Listing 6.1 Perintah Terminal Deployment Aplikasi</div>
+            <div class="code-block"># 1. Kloning repositori proyek dari GitHub
+git clone https://github.com/zakkyanurhadi/BNSP-web-Sekolah.git
+cd BNSP-web-Sekolah
+
+# 2. Pasang dependensi PHP dan Frontend
+composer install
+npm install && npm run build
+
+# 3. Konfigurasi Lingkungan & Generate Kunci Aplikasi
+cp .env.example .env
+php artisan key:generate
+
+# 4. Migrasi Basis Data & Seeder Data Awal
+php artisan migrate:fresh --seed
+
+# 5. Buat Tautan Simbolik Penyimpanan Media
+php artisan storage:link
+
+# 6. Jalankan Server Pengembangan Lokal
+php artisan serve</div>
+
+            <h3 class="subsection-heading">6.2 Akses Portal Publik dan Panel Administrator CMS</h3>
+            <div class="table-caption">Tabel 6.1 Informasi Akses dan Kredensial Sistem</div>
+            <table class="doc-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Portal</th>
+                        <th style="width: 32%;">Alamat URL</th>
+                        <th style="width: 25%;">Kredensial Akses</th>
+                        <th style="width: 18%;">Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Portal Publik</strong></td>
+                        <td><code>http://127.0.0.1:8000</code></td>
+                        <td>Terbuka untuk umum</td>
+                        <td>Portal profil sekolah</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Panel Administrator CMS</strong></td>
+                        <td><code>http://127.0.0.1:8000/admin</code></td>
+                        <td>Surel: <strong>admin@sekolah.web.id</strong><br>Sandi: <strong>password</strong></td>
+                        <td>Panel manajemen konten & CRUD berita</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Peta Situs SEO</strong></td>
+                        <td><code>http://127.0.0.1:8000/sitemap.xml</code></td>
+                        <td>Terbuka untuk umum</td>
+                        <td>Dokumen XML sitemap</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 7. Dokumentasi Visual Antarmuka Sistem (SCREENSHOT) -->
+        <section id="bab-7">
+            <h2 class="section-heading">7. Dokumentasi Visual Antarmuka Sistem (Screenshot)</h2>
+            <p class="no-indent">
+                Berikut adalah dokumentasi visual antarmuka sistem yang membuktikan pemenuhan seluruh butir skenario demonstrasi:
+            </p>
+
+            <!-- Figure 7.1 -->
+            <div class="figure-block">
+                <div class="figure-frame">
+                    <img src="screenshots/01_beranda_swiper_hero.png" alt="Beranda Swiper Hero Slider" class="figure-img">
+                </div>
+                <div class="figure-caption">Gambar 7.1 Tampilan Beranda dengan Zero Section Swiper.js Slider & Floating Card</div>
+                <div class="figure-desc">Menampilkan hero slider "SEMANGAT SPMB", navigasi bulat, serta floating card Sambutan Kepala Sekolah dan statistik data pokok.</div>
+            </div>
+
+            <!-- Figure 7.2 -->
+            <div class="figure-block">
+                <div class="figure-frame">
+                    <img src="screenshots/02_zero_section_detail.png" alt="Detail Zero Section Swiper" class="figure-img">
+                </div>
+                <div class="figure-caption">Gambar 7.2 Detail Zero Section Slider dan Floating Card Sambutan & Statistik</div>
+                <div class="figure-desc">Detail foto dan kutipan Kepala Sekolah (Agus Hasan Sadzili, S.Pd) serta statistik 75 Guru/Tendik, 1238 Siswa, dan 33 Rombel.</div>
+            </div>
+
+            <!-- Figure 7.3 -->
+            <div class="figure-block">
+                <div class="figure-frame">
+                    <img src="screenshots/03_profil_sekolah.png" alt="Profil Sekolah dan Tabel 22 Parameter" class="figure-img">
+                </div>
+                <div class="figure-caption">Gambar 7.3 Halaman Profil Sekolah dan Tabel Informasi Profil Sekolah (22 Parameter Legalitas)</div>
+                <div class="figure-desc">Tabel resmi semantik yang merangkum 22 data legalitas: NPSN 10812345, Akreditasi A, SK pendirian, alamat, dan kontak.</div>
+            </div>
+
+            <!-- Figure 7.4 -->
+            <div class="figure-block">
+                <div class="figure-frame">
+                    <img src="screenshots/04_berita_sekolah.png" alt="Warta Berita Sekolah" class="figure-img">
+                </div>
+                <div class="figure-caption">Gambar 7.4 Halaman Warta Berita & Informasi Sekolah</div>
+                <div class="figure-desc">Katalog warta berita dengan filter kategori, pencarian teks, badge status, dan tanggal rilis artikel.</div>
+            </div>
+
+            <!-- Figure 7.5 -->
+            <div class="figure-block">
+                <div class="figure-frame">
+                    <img src="screenshots/05_galeri_kegiatan.png" alt="Galeri Multimedia Sekolah" class="figure-img">
+                </div>
+                <div class="figure-caption">Gambar 7.5 Halaman Galeri Dokumentasi Multimedia Sekolah</div>
+                <div class="figure-desc">Dokumentasi foto sarana prasarana, aktivitas belajar, dan kegiatan ekstrakurikuler siswa.</div>
+            </div>
+
+            <!-- Figure 7.6 -->
+            <div class="figure-block">
+                <div class="figure-frame">
+                    <img src="screenshots/06_kontak_sekolah.png" alt="Formulir Kontak Sekolah" class="figure-img">
+                </div>
+                <div class="figure-caption">Gambar 7.6 Halaman Formulir Kontak & Lokasi Peta Sekolah</div>
+                <div class="figure-desc">Formulir interaktif penyampaian aspirasi masyarakat dengan validasi server-side dan sematan peta resmi.</div>
+            </div>
+
+            <!-- Figure 7.7 -->
+            <div class="figure-block">
+                <div class="figure-frame">
+                    <img src="screenshots/07_admin_login.png" alt="Login Administrator CMS" class="figure-img">
+                </div>
+                <div class="figure-caption">Gambar 7.7 Halaman Autentikasi Masuk Panel Administrator CMS</div>
+                <div class="figure-desc">Formulir login terproteksi pada rute /admin/login dengan kredensial admin@sekolah.web.id / password.</div>
+            </div>
+
+            <!-- Figure 7.8 -->
+            <div class="figure-block">
+                <div class="figure-frame">
+                    <img src="screenshots/08_admin_dashboard.png" alt="Dasbor Panel CMS Manajemen Konten Sekolah" class="figure-img">
+                </div>
+                <div class="figure-caption">Gambar 7.8 Dasbor Panel CMS Manajemen Konten Sekolah</div>
+                <div class="figure-desc">Pusat pemantauan statistik data pokok, ringkasan legalitas sekolah, daftar warta berita, dan kotak masuk pesan.</div>
+            </div>
+        </section>
+
+        <!-- 8. Lampiran Potongan Kode Sumber -->
+        <section id="bab-8">
+            <h2 class="section-heading">8. Lampiran Potongan Kode Sumber (Source Code Evidence)</h2>
+            
+            <h3 class="subsection-heading">8.1 Komponen Zero Section Swiper Hero Slider (resources/views/home.blade.php)</h3>
+            <div class="code-title">Listing 8.1 Zero Section Swiper Hero Slider</div>
+            <div class="code-block">&lt;!-- Swiper Hero Slider --&gt;
+&lt;div class="hero-slider swiper-container"&gt;
+    &lt;div class="swiper-wrapper"&gt;
+        &lt;div class="swiper-slide slide-1"&gt;
+            &lt;div class="slide-overlay"&gt;&lt;/div&gt;
+            &lt;div class="slide-content"&gt;
+                &lt;h1 class="slide-title"&gt;SEMANGAT SPMB&lt;/h1&gt;
+                &lt;p class="slide-subtitle"&gt;Penerimaan Peserta Didik Baru Tahun Ajaran 2026/2027 Telah Dibuka&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- Tombol Navigasi Lingkaran --&gt;
+    &lt;div class="swiper-nav-buttons"&gt;
+        &lt;div class="swiper-button-prev hero-nav-btn"&gt;&lt;i class="fa fa-arrow-left"&gt;&lt;/i&gt;&lt;/div&gt;
+        &lt;div class="swiper-button-next hero-nav-btn"&gt;&lt;i class="fa fa-arrow-right"&gt;&lt;/i&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</div>
+
+            <h3 class="subsection-heading">8.2 Controller CRUD Manajemen Berita Admin (app/Http/Controllers/Admin/AdminBeritaController.php)</h3>
+            <div class="code-title">Listing 8.2 Controller CRUD Berita Panel CMS</div>
+            <div class="code-block">namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\News;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\View\View;
+
+class AdminBeritaController extends Controller
+{
+    public function index(Request $request): View
+    {
+        $query = News::latest();
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%' . $request->input('search') . '%');
+        }
+        $beritas = $query->paginate(10)->withQueryString();
+        return view('admin.berita.index', compact('beritas'));
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'judul' => 'required|string|max:255',
+            'slug'  => 'required|string|max:255|unique:news,slug',
+        ]);
+        News::create([
+            'title'   => $validated['judul'],
+            'slug'    => Str::slug($validated['slug']),
+            'content' => $request->input('isi_berita') ?? 'Konten berita.',
+            'author'  => auth()->user()->name ?? 'Administrator',
+            'published_at' => now(),
+        ]);
+        return redirect()->route('berita')->with('success', 'Berita berhasil ditambahkan!');
+    }
+}</div>
+        </section>
+
+        <!-- 9. Kesimpulan dan Penutup -->
+        <section id="bab-9">
+            <h2 class="section-heading">9. Kesimpulan dan Penutup</h2>
+            <p>
+                Berdasarkan seluruh tahapan perancangan, implementasi, dan pengujian yang telah dilaksanakan selama pelaksanaan Tugas Praktik Demonstrasi (FR.IA.02), dapat disimpulkan bahwa:
+            </p>
+            <ol>
+                <li>Seluruh butir skenario tugas telah diselesaikan dengan tingkat keterpenuhan 100%, meliputi navigasi clean underline responsif, zero section slider Swiper.js, halaman mandiri per menu, tabel profil 22 parameter resmi, serta Panel CMS Administrator dengan contoh implementasi CRUD berita lengkap.</li>
+                <li>Seluruh unit kompetensi pada Skema Junior Web Developer (J.620100.005.02 s.d. J.620100.019.02) telah diimplementasikan dan diverifikasi lulus sempurna melalui Automated Feature Tests.</li>
+            </ol>
+
+            <div class="signature-section">
+                <div style="text-align: right; margin-bottom: 1rem;">
+                    Bandar Lampung, 14 September 2026
+                </div>
+                <div class="signature-grid">
+                    <div class="signature-box">
+                        <div>Peserta Uji Kompetensi (Asesi)</div>
+                        <div class="signature-space"></div>
+                        <div class="signature-name">Zakkya Nur Hadi</div>
+                        <div class="signature-id">Surel: zakkya.nurhadi@gmail.com</div>
+                    </div>
+                    <div class="signature-box">
+                        <div>Asesor Penguji Kompetensi</div>
+                        <div class="signature-space"></div>
+                        <div class="signature-name">Yosep Kurniawan, ST</div>
+                        <div class="signature-id">No. Reg: 000.002992.2021</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>
