@@ -469,7 +469,8 @@
         @media print {
             body {
                 background: #ffffff !important;
-                font-size: 12pt;
+                font-size: 11.5pt;
+                line-height: 1.45;
                 margin: 0 !important;
                 padding: 0 !important;
             }
@@ -496,26 +497,68 @@
                 page-break-before: always;
                 break-before: page;
             }
+            h2.section-heading {
+                margin-top: 1.35rem !important;
+                margin-bottom: 0.55rem !important;
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+            h3.subsection-heading {
+                margin-top: 0.85rem !important;
+                margin-bottom: 0.3rem !important;
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+            h4.subsubsection-heading {
+                margin-top: 0.7rem !important;
+                margin-bottom: 0.25rem !important;
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+            p {
+                margin-bottom: 0.45rem !important;
+                orphans: 3;
+                widows: 3;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            ol, ul {
+                margin-top: 0.25rem !important;
+                margin-bottom: 0.45rem !important;
+            }
+            li {
+                margin-bottom: 0.2rem !important;
+            }
             .doc-table {
-                font-size: 9.5pt;
-                margin: 0.5rem 0 0.85rem;
+                font-size: 9pt;
+                margin: 0.35rem 0 0.65rem;
             }
             .doc-table th, .doc-table td {
-                padding: 4px 6px;
+                padding: 3.5px 5.5px;
+            }
+            .code-title {
+                margin-top: 0.35rem !important;
+                margin-bottom: 2px !important;
+                page-break-after: avoid;
+                break-after: avoid;
             }
             .code-block {
                 font-size: 8pt;
                 line-height: 1.25;
-                padding: 6px 10px;
-                margin: 0.35rem 0 0.75rem;
+                padding: 5px 8px;
+                margin: 0.25rem 0 0.55rem !important;
             }
             .figure-block {
-                margin: 0.85rem 0;
+                margin: 0.75rem 0;
                 page-break-inside: avoid;
                 break-inside: avoid;
             }
             .figure-img {
-                max-height: 300px !important;
+                max-height: 290px !important;
+            }
+            #bab-9 {
+                page-break-inside: avoid;
+                break-inside: avoid;
             }
         }
     </style>
@@ -1376,9 +1419,9 @@ class AdminBeritaController extends Controller
                 Berdasarkan seluruh tahapan perancangan, implementasi, dan pengujian yang telah dilaksanakan selama pelaksanaan Tugas Praktik Demonstrasi (FR.IA.02), dapat disimpulkan bahwa:
             </p>
             <ol>
-                <li style="font-weight: 600; margin-bottom: 0.5rem;">
+                <li style="font-weight: 600; margin-bottom: 0.35rem;">
                     Seluruh butir skenario tugas telah diselesaikan dengan tingkat keterpenuhan 100%:
-                    <ul style="list-style-type: circle; font-weight: normal; margin-top: 0.35rem; margin-left: 1.5rem;">
+                    <ul style="list-style-type: circle; font-weight: normal; margin-top: 0.25rem; margin-left: 1.5rem;">
                         <li>Antarmuka bilah navigasi interaktif dengan deteksi scroll jendela dan drawer mobile responsif telah berfungsi prima.</li>
                         <li>Menu navigasi utama (Beranda, Profil, Ekstrakurikuler, Galeri, Berita, Kontak) terorganisasi rapi dan terpusat.</li>
                         <li>Halaman beranda memuat seluruh konten yang dipersyaratkan: warta berita terkini, dokumentasi galeri foto, serta seksi data pokok pendidikan (58 Guru, 1.238 Siswa, 33 Rombongan Belajar, dan 17 Tenaga Kependidikan).</li>
@@ -1386,9 +1429,9 @@ class AdminBeritaController extends Controller
                         <li>Tabel Informasi Profil Sekolah yang merangkum 22 data legalitas resmi telah tersaji elegan pada menu Profil.</li>
                     </ul>
                 </li>
-                <li style="font-weight: 600; margin-bottom: 0.5rem; margin-top: 0.75rem;">
+                <li style="font-weight: 600; margin-bottom: 0.35rem; margin-top: 0.5rem;">
                     Seluruh unit kompetensi pada Skema Junior Web Developer telah diimplementasikan secara nyata:
-                    <ul style="list-style-type: circle; font-weight: normal; margin-top: 0.35rem; margin-left: 1.5rem;">
+                    <ul style="list-style-type: circle; font-weight: normal; margin-top: 0.25rem; margin-left: 1.5rem;">
                         <li><strong>J.620100.015.01:</strong> Disusun menggunakan arsitektur berkas MVC Laravel yang terisolasi dan bersih.</li>
                         <li><strong>J.620100.016.01:</strong> Mengikuti standar pengkodean PSR-12, pertahanan keamanan anti-CSRF/SQLi, dan aksesibilitas semantik.</li>
                         <li><strong>J.620100.017.02:</strong> Diterapkan melalui enkapsulasi Model Eloquent, RESTful Controllers, dan templating Blade modular.</li>
@@ -1398,7 +1441,7 @@ class AdminBeritaController extends Controller
                     </ul>
                 </li>
             </ol>
-            <p style="margin-top: 1rem;">
+            <p style="margin-top: 0.5rem;">
                 Dengan demikian, Website Sekolah SMA Negeri 1 Harapan Bangsa siap untuk didemonstrasikan dan diujikan di hadapan Asesor Uji Kompetensi pada Skema Sertifikasi Junior Web Developer.
             </p>
         </section>
