@@ -29,6 +29,36 @@ Route::get('/berita/{slug}', [NewsController::class, 'show'])->name('news.show')
 Route::get('/kontak', [ContactController::class, 'index'])->name('contact');
 Route::post('/kontak', [ContactController::class, 'store'])->name('contact.store');
 
+// Peta Situs XML (Sitemap Dynamic Generator SEO)
+Route::get('/sitemap.xml', function () {
+    $urls = [
+        route('home'),
+        route('profile'),
+        route('extracurricular.index'),
+        route('gallery.index'),
+        route('news.index'),
+        route('contact'),
+    ];
+    
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+    
+    foreach ($urls as $url) {
+        $xml .= "  <url>\n    <loc>{$url}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n";
+    }
+    
+    if (class_exists(\App\Models\News::class)) {
+        foreach (\App\Models\News::latest()->get() as $news) {
+            $url = route('news.show', $news->slug);
+            $xml .= "  <url>\n    <loc>{$url}</loc>\n    <changefreq>daily</changefreq>\n    <priority>0.9</priority>\n  </url>\n";
+        }
+    }
+    
+    $xml .= '</urlset>';
+    
+    return response($xml, 200)->header('Content-Type', 'text/xml');
+})->name('sitemap');
+
 // ==========================================
 // PANEL CMS MANAJEMEN KONTEN SEKOLAH
 // ==========================================
